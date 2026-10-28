@@ -1,0 +1,13 @@
+[Unit]
+Description=Notify when the WeChat tray icon blinks (unread messages)
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/Projects/wechat-tray-watch/wechat_tray_watch
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=graphical-session.target
