@@ -54,3 +54,7 @@ systemctl --user daemon-reload
 systemctl --user enable --now wechat-tray-watch.service
 journalctl --user -u wechat-tray-watch -f
 ```
+
+## License
+
+MIT, see [LICENSE](LICENSE).
