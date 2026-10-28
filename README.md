@@ -1,5 +1,7 @@
 # wechat-tray-watch
 
+[![ci](https://github.com/Young-Lord/wechat-tray-watch/actions/workflows/ci.yml/badge.svg)](https://github.com/Young-Lord/wechat-tray-watch/actions/workflows/ci.yml)
+
 Sends a desktop notification the moment the WeChat tray icon starts blinking
 (i.e. when there are unread messages), and only on that transition:
 idle → blinking notifies once, blinking → idle stays silent.
@@ -20,8 +22,7 @@ seconds" as blinking. The service name is discovered through
 ## Requirements
 
 - KDE Plasma with a StatusNotifierItem-based tray
-- C build: `gcc` + `pkg-config` + libsystemd (headers ship with the `systemd` package)
-- Python version (reference implementation): `python-dbus`, `python-gobject`
+- C build: `gcc` or `clang` + `pkg-config` + libsystemd (headers ship with the `systemd` package)
 
 ## Build and run
 
@@ -33,10 +34,7 @@ make                                   # builds ./wechat_tray_watch (sd-bus, ~27
 ./wechat_tray_watch --test             # send one notification and exit
 ```
 
-`./wechat_tray_watch.py` is the original Python implementation with identical
-behaviour, kept for comparison (needs `python-dbus` + `python-gobject`).
-
-The C daemon is fully event driven: the burst timer is armed only while icon
+The daemon is fully event driven: the burst timer is armed only while icon
 updates arrive, so an idle process never wakes up. Measured idle cost on
 Plasma 6.8/Wayland: RSS ~3.3 MB, 1 thread, 7 fds, 0 CPU ticks over 30 s.
 
