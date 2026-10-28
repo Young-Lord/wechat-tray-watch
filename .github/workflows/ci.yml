@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - runner: ubuntu-latest
+          - runner: ubuntu-24.04
             arch: amd64
           - runner: ubuntu-24.04-arm
             arch: arm64
@@ -31,7 +31,7 @@ jobs:
           mkdir -p dist
           cp wechat_tray_watch "dist/wechat_tray_watch-linux-${{ matrix.arch }}"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: bin-${{ matrix.arch }}
           path: dist/*
@@ -43,7 +43,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           path: dist
           merge-multiple: true
